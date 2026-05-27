@@ -206,18 +206,6 @@ const validatePlacement = (
     return { ok: false, message: `${item.name} is already present in Paris.` };
   }
 
-  if (item.id === "wooden-bridge") {
-    const hasNorthSouth =
-      getTile(state.tiles, tile.x, tile.y - 1)?.terrain !== "river" &&
-      getTile(state.tiles, tile.x, tile.y + 1)?.terrain !== "river";
-    const hasEastWest =
-      getTile(state.tiles, tile.x - 1, tile.y)?.terrain !== "river" &&
-      getTile(state.tiles, tile.x + 1, tile.y)?.terrain !== "river";
-    if (!hasNorthSouth && !hasEastWest) {
-      return { ok: false, message: "Bridge tiles need land or island on opposite sides." };
-    }
-  }
-
   const existingItemId = tile.placedObject?.itemId;
   const existing = existingItemId ? buildItemById[existingItemId] : undefined;
   const replacingOldBuilding =
